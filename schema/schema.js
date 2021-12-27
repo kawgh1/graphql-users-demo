@@ -1,7 +1,9 @@
 // import GraphQL library
 const graphql = require("graphql");
 // lodash is a helper library for walking thru collections of data
-const _ = require("lodash");
+// const _ = require("lodash");
+// axios
+const axios = require("axios");
 
 // The entire purpose of the schema.js file is to instruct GraphQL about what kind of data
 // and what kinds of properties that data has in our application
@@ -13,10 +15,10 @@ const _ = require("lodash");
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = graphql;
 
 // hard coded array of users
-const users = [
-    { id: "23", firstName: "Bill", age: 20 },
-    { id: "37", firstName: "Samantha", age: 21 },
-];
+// const users = [
+//     { id: "23", firstName: "Bill", age: 20 },
+//     { id: "37", firstName: "Samantha", age: 21 },
+// ];
 
 const UserType = new GraphQLObjectType({
     // name required
@@ -44,7 +46,12 @@ const RootQuery = new GraphQLObjectType({
             // parentValue is not used much
             // args is what you are giving GraphQL to find the data you want, like the user id
             resolve(parentValue, args) {
-                return _.find(users, { id: args.id });
+                // return local data
+                // return _.find(users, { id: args.id });
+                // return data from another server
+                return axios
+                    .get(`http://localhost:3000/users/${args.id}`)
+                    .then((response) => response.data);
             },
         },
     },
