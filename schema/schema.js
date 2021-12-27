@@ -1,5 +1,7 @@
 // import GraphQL library
 const graphql = require("graphql");
+// lodash is a helper library for walking thru collections of data
+const _ = require("lodash");
 
 // The entire purpose of the schema.js file is to instruct GraphQL about what kind of data
 // and what kinds of properties that data has in our application
@@ -8,7 +10,13 @@ const graphql = require("graphql");
 
 // we will use this GraphQLObjectType variable to instruct GraphQL
 // about the presence or idea schema of a User in our app
-const { GraphQLObjectType, GraphQLString, GraphQLInt } = graphql;
+const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = graphql;
+
+// hard coded array of users
+const users = [
+    { id: "23", firstName: "Bill", age: 20 },
+    { id: "37", firstName: "Samantha", age: 21 },
+];
 
 const UserType = new GraphQLObjectType({
     // name required
@@ -20,4 +28,31 @@ const UserType = new GraphQLObjectType({
         firstName: { type: GraphQLString },
         age: { type: GraphQLInt },
     },
+});
+
+// the root query is what allows GraphQL to jump and  land on any data piece in the graph
+// you can read this as I'm aware of the UserType and if you give GraphQL an 'id' in the args,
+// GraphQL will return the User object
+const RootQuery = new GraphQLObjectType({
+    name: "RootQueryType",
+    fields: {
+        user: {
+            type: UserType,
+            args: { id: { type: GraphQLString } },
+            // the resolve function's purpose is to actually reach out into the database
+            // and grab the data you asked for
+            // parentValue is not used much
+            // args is what you are giving GraphQL to find the data you want, like the user id
+            resolve(parentValue, args) {
+                return _.find(users, { id: args.id });
+            },
+        },
+    },
+});
+
+// GraphQLSchema takes in a RootQuery and returns a GraphQLSchema instance
+// so we export this into our server.js file and now server.js can access
+// the RootQuery and the whole GraphQLSchema here
+module.exports = new GraphQLSchema({
+    query: RootQuery,
 });

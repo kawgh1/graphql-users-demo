@@ -1,4 +1,9 @@
-GraphQL Schema
+# GraphQL
+
+-   GraphQL is probably 50% about creating a good Schema and 50% about writing good queries
+-   GraphQL looks like Javascript but **it is NOT Javascript**
+
+# GraphQL Schema
 
 -   User
 

@@ -3,6 +3,9 @@ const express = require("express");
 // graphql
 const expressGraphQL = require("express-graphql").graphqlHTTP;
 
+// GraphQL schema
+const schema = require("./schema/schema");
+
 const app = express();
 
 // if request comes in looking for GraphQL - route to GraphQL
@@ -10,6 +13,7 @@ const app = express();
 app.use(
     "/graphql",
     expressGraphQL({
+        schema: schema,
         graphiql: true,
     })
 );
