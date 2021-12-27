@@ -108,20 +108,20 @@
 
 ### The majority of Production Environment GraphQL queries will be asynchronous requests to other servers or APIs
 
-![graphql-async-request](https://raw.githubusercontent.com/kawgh1/graphql-users-demo/main/diagrams/graphql-async-resolve-function.png)
+![graphql-async-request](https://raw.githubusercontent.com/kawgh1/graphql-users-demo/main/diagrams/graphql-async-resolve-function1.png)
 
--          File: schema.js
+-            File: schema.js
 
-              const RootQuery = new GraphQLObjectType({
-                      name: "RootQueryType",
-                      fields: {
-                          user: {
-                              type: UserType,
-                              args: { id: { type: GraphQLString }
-                              },
-                              resolve(parentValue, args) {
-                                  return _.find(users, { id: args.id });
-                              },
-                          },
-                      },
-                  });
+                const RootQuery = new GraphQLObjectType({
+                        name: "RootQueryType",
+                        fields: {
+                            user: {
+                                type: UserType,
+                                args: { id: { type: GraphQLString }
+                                },
+                                resolve(parentValue, args) {
+                                    return _.find(users, { id: args.id });
+                                },
+                            },
+                        },
+                    });
