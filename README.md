@@ -1,12 +1,14 @@
 # GraphQL
 
 -   GraphQL is probably 50% about creating a good Schema and 50% about writing good queries
--   GraphQL looks like Javascript but **it is NOT Javascript**
+-   To start JSON server - represents an outside API server **npm run json:server**
+-   To start express server - represents our internal server **npm run dev**
 
 #### Uses a fake JSON Server to serve data
 
 -   https://github.com/typicode/json-server
 -   npm install json-server
+-   **npm run json:server**
 -   Getting started
 
         Install JSON Server
@@ -126,3 +128,12 @@
                     },
                 },
             });
+
+# Mutations
+
+-   Mutations are used to change the data stored on are server
+    -   Create, Update, Delete
+-   Mutations can be difficult to work with so proper form and syntax are key
+-   ![graphql-query-vs-mutation]()
+-   ![graphql-mutation]()
+-   ![put-vs-patch]

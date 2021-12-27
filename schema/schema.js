@@ -12,7 +12,14 @@ const axios = require("axios");
 
 // we will use this GraphQLObjectType variable to instruct GraphQL
 // about the presence or idea schema of a User in our app
-const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = graphql;
+const {
+    GraphQLObjectType,
+    GraphQLString,
+    GraphQLInt,
+    GraphQLSchema,
+    GraphQLList,
+    GraphQLNonNull,
+} = graphql;
 
 // hard coded array of users
 // const users = [
@@ -24,13 +31,25 @@ const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = graphql;
 const CompanyType = new GraphQLObjectType({
     // name required
     name: "Company",
-    // fields required
-    fields: {
+    // because we are referencing UserType before it is defined, we turn fields into
+    // an arrow function, a closure, which means the function is defined but not run until
+    // the whole file is loaded (and thus after UserType is defined)
+    fields: () => ({
         // GraphQL has its own data types
         id: { type: GraphQLString },
         name: { type: GraphQLString },
         description: { type: GraphQLString },
-    },
+        users: {
+            type: new GraphQLList(UserType),
+            resolve(parentValue, args) {
+                return axios
+                    .get(
+                        `http://localhost:3000/companies/${parentValue.id}/users`
+                    )
+                    .then((response) => response.data);
+            },
+        },
+    }),
 });
 
 const UserType = new GraphQLObjectType({
@@ -78,6 +97,51 @@ const RootQuery = new GraphQLObjectType({
                     .then((response) => response.data);
             },
         },
+        company: {
+            type: CompanyType,
+            args: { id: { type: GraphQLString } },
+            resolve(parentValue, args) {
+                return axios
+                    .get(`http://localhost:3000/companies/${args.id}`)
+                    .then((response) => response.data);
+            },
+        },
+    },
+});
+
+// Root Mutation
+const mutation = new GraphQLObjectType({
+    name: "Mutation",
+    fields: {
+        addUser: {
+            // type here refers to the type of data we will return from the resolve function
+            // thus the data type you are calling the mutation on might not be the same
+            // data type that is returned from that mutation
+            type: UserType,
+            args: {
+                firstName: { type: new GraphQLNonNull(GraphQLString) },
+                age: { type: new GraphQLNonNull(GraphQLInt) },
+                companyId: { type: GraphQLString },
+            },
+            // resolve(parentValue, args) {
+            resolve(parentValue, { firstName, age }) {
+                // post
+                return axios
+                    .post(`http://localhost:3000/users`, { firstName, age })
+                    .then((response) => response.data);
+            },
+        },
+        deleteUser: {
+            type: UserType,
+            args: {
+                id: { type: new GraphQLNonNull(GraphQLString) },
+            },
+            resolve(parentValue, { id }) {
+                return axios
+                    .delete(`http://localhost:3000/users/${id}`)
+                    .then((response) => response.data);
+            },
+        },
     },
 });
 
@@ -86,4 +150,5 @@ const RootQuery = new GraphQLObjectType({
 // the RootQuery and the whole GraphQLSchema here
 module.exports = new GraphQLSchema({
     query: RootQuery,
+    mutation: mutation,
 });
