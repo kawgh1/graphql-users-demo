@@ -96,12 +96,32 @@
 
 ### How GraphQL-Express server works
 
-![how-graphql-express-server-works](https://github.com/kawgh1/graphql-users-demo/blob/main/express-server-graphql.png)
+![how-graphql-express-server-works](https://github.com/kawgh1/graphql-users-demo/blob/main/diagrams/express-server-graphql.png)
 
 ### GraphiQL Dashboard
 
-![graphiql-dashboard](https://raw.githubusercontent.com/kawgh1/graphql-users-demo/main/graphiql-dashboard2.png)
+![graphiql-dashboard](https://raw.githubusercontent.com/kawgh1/graphql-users-demo/main/diagrams/graphiql-dashboard2.png)
 
 ### Big Company GraphQL Server Architecture
 
-![big-company-server-architecture](https://raw.githubusercontent.com/kawgh1/graphql-users-demo/main/big-company-graphql-server-architecture.png)
+![big-company-server-architecture](https://raw.githubusercontent.com/kawgh1/graphql-users-demo/main/diagrams/big-company-graphql-server-architecture.png)
+
+### The majority of Production Environment GraphQL queries will be asynchronous requests to other servers or APIs
+
+![graphql-async-request](https://raw.githubusercontent.com/kawgh1/graphql-users-demo/main/diagrams/graphql-async-resolve-function.png)
+
+-          File: schema.js
+
+              const RootQuery = new GraphQLObjectType({
+                      name: "RootQueryType",
+                      fields: {
+                          user: {
+                              type: UserType,
+                              args: { id: { type: GraphQLString }
+                              },
+                              resolve(parentValue, args) {
+                                  return _.find(users, { id: args.id });
+                              },
+                          },
+                      },
+                  });
