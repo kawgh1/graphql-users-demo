@@ -110,19 +110,19 @@
 
 ![graphql-async-request](https://raw.githubusercontent.com/kawgh1/graphql-users-demo/main/diagrams/graphql-async-resolve-function1.png)
 
--              File: schema.js
+-   File: schema.js
 
-                  const RootQuery = new GraphQLObjectType({
-                          name: "RootQueryType",
-                          fields: {
-                              user: {
-                                  type: UserType,
-                                  args: { id: { type: GraphQLString }
-                                  },
-                                  resolve(parentValue, args) {
-                                      return axios.get(`http://localhost:3000/users/${args.id}`)
-                                                          .then((response) => response.data);
-                                  },
-                              },
-                          },
-                      });
+        const RootQuery = new GraphQLObjectType({
+                name: "RootQueryType",
+                fields: {
+                    user: {
+                        type: UserType,
+                        args: { id: { type: GraphQLString }
+                        },
+                        resolve(parentValue, args) {
+                            return axios.get(`http://localhost:3000/users/${args.id}`)
+                                                .then((response) => response.data);
+                        },
+                    },
+                },
+            });
