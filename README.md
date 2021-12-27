@@ -134,6 +134,17 @@
 -   Mutations are used to change the data stored on are server
     -   Create, Update, Delete
 -   Mutations can be difficult to work with so proper form and syntax are key
--   ![graphql-query-vs-mutation]()
--   ![graphql-mutation]()
--   ![put-vs-patch]
+
+### GraphQL Query vs Mutation
+
+-   ![graphql-query-vs-mutation](https://raw.githubusercontent.com/kawgh1/graphql-users-demo/main/diagrams/graphql-query-vs-mutation.png)
+
+### GraphQL Mutation
+
+-   ![graphql-mutation](https://raw.githubusercontent.com/kawgh1/graphql-users-demo/main/diagrams/graphql-mutation.png)
+
+### HTTP PUT vs PATCH
+
+-   **PUT** replaces the entire record with whatever properties are provided - this can lead to losing pre-existing properties that weren't explicitly entered
+-   **PATCH** only updates the explicit properties listed in the request, it makes no other changes
+-   ![put-vs-patch](https://raw.githubusercontent.com/kawgh1/graphql-users-demo/main/diagrams/put-vs-patch.png)
