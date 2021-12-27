@@ -1,8 +1,12 @@
-# GraphQL
+# GraphQL Express
+
+-   **This repo contains a GraphQL Express Server.**
+-   **This is NOT an Apollo Server**
 
 -   GraphQL is probably 50% about creating a good Schema and 50% about writing good queries
 -   To start JSON server - represents an outside API server **npm run json:server**
 -   To start express server - represents our internal server **npm run dev**
+-
 
 #### Uses a fake JSON Server to serve data
 
@@ -148,3 +152,20 @@
 -   **PUT** replaces the entire record with whatever properties are provided - this can lead to losing pre-existing properties that weren't explicitly entered
 -   **PATCH** only updates the explicit properties listed in the request, it makes no other changes
 -   ![put-vs-patch](https://raw.githubusercontent.com/kawgh1/graphql-users-demo/main/diagrams/put-vs-patch.png)
+
+# GraphQL Clients
+
+-   **Remember**: The purpose of each of these is to make a request to our GraphQL Server, get the response back and forward it to our React front-end
+
+-   ## Lokka
+    -   As simple as possible. Basic queries, mutations. Some simple caching.
+-   ## Apollo Client
+
+    -   Produced by same people as MeteorJS. Good balance between features and complexity.
+    -   9 times out of 10 Apollo is the best fit for the problem re: GraphQL Clients
+
+-   ## Relay
+    -   **Amazing performance for mobile.** - Relay was _built_ for mobile.
+    -   By far the most insanely complex, especially re: mutations, like 10x more complex
+    -   Facebook uses Relay because they have the budget to afford the complexity
+    -   Startups should veer away from Relay on a cost-benefit analysis
