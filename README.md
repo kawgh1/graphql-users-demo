@@ -56,3 +56,15 @@
             }
 
 **npm install --save express express-graphql graphql lodash**
+
+![how-graphql-express-server-works](https://github.com/kawgh1/graphql-users-demo/blob/main/express-server-graphql.png)
+
+### How GraphQL-Express server works
+
+!
+
+### GraphiQL Dashboard
+
+![big-company-server-architecture](https://raw.githubusercontent.com/kawgh1/graphql-users-demo/main/big-company-graphql-server-architecture.png)
+
+### Big Company GraphQL Server Architecture
