@@ -162,6 +162,31 @@
 
     -   Produced by same people as MeteorJS. Good balance between features and complexity.
     -   9 times out of 10 Apollo is the best fit for the problem re: GraphQL Clients
+    -   ## Apollo Client vs GraphQL-Express Server (this repo)
+
+        -   GraphQL-Express contains the entire Schema in one file - it contains both data Types and queries/mutations
+        -   **Apollo splits this out into two files**
+
+            -   Types File
+
+                    type User {
+                        id: String!
+                        firstName: String
+                        age: Int
+                        ...
+                    }
+
+                    ...
+
+            -   Resolvers File
+
+                    const resolveFunctions = {
+                        Query: {
+                            users() {
+                                return users
+                            }
+                        }
+                    }
 
 -   ## Relay
     -   **Amazing performance for mobile.** - Relay was _built_ for mobile.
