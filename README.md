@@ -1,14 +1,13 @@
 # GraphQL Express
 
--   **This repo contains a GraphQL Express Server.**
--   **This is NOT an Apollo Server**
-
+-   ### **This repo contains a GraphQL Express Server.**
+-   ### **This is NOT an Apollo Server**
 -   GraphQL is probably 50% about creating a good Schema and 50% about writing good queries
 -   To start JSON server - represents an outside API server **npm run json:server**
 -   To start express server - represents our internal server **npm run dev**
 -
 
-#### Uses a fake JSON Server to serve data
+#### Uses a fake JSON Server to act as an outside API/Server to serve data to fetches
 
 -   https://github.com/typicode/json-server
 -   npm install json-server
