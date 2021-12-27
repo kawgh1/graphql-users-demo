@@ -1,4 +1,4 @@
-# GraphQL Express
+# GraphQL Express Server
 
 -   ### **This repo contains a GraphQL Express Server.**
 -   ### **This is NOT an Apollo Server**
@@ -164,8 +164,12 @@
     -   9 times out of 10 Apollo is the best fit for the problem re: GraphQL Clients
     -   ## Apollo Client vs GraphQL-Express Server (this repo)
 
-        -   GraphQL-Express contains the entire Schema in one file - it contains both data Types and queries/mutations
+        -   **GraphQL-Express** contains the entire Schema in one file - it contains both data Types and queries/mutations
+            -   GraphQL-Express lists Data Type Resolvers (create, update, delete) WHERE the Data Types are defined
+            -   GraphQL-Express syntax is **very** stable, not going to change but more verbose
         -   **Apollo splits this out into two files**
+
+            -   Apollo syntax is less stable, but easier to read
 
             -   Types File
 
