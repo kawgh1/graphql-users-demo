@@ -61,7 +61,7 @@
 
 ### How GraphQL-Express server works
 
-!
+![graphiql-dashboard](https://raw.githubusercontent.com/kawgh1/graphql-users-demo/main/graphiql-dashboard2.png)
 
 ### GraphiQL Dashboard
 
