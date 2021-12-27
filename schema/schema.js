@@ -20,6 +20,19 @@ const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLSchema } = graphql;
 //     { id: "37", firstName: "Samantha", age: 21 },
 // ];
 
+// Important to define CompanyType before UserType
+const CompanyType = new GraphQLObjectType({
+    // name required
+    name: "Company",
+    // fields required
+    fields: {
+        // GraphQL has its own data types
+        id: { type: GraphQLString },
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+    },
+});
+
 const UserType = new GraphQLObjectType({
     // name required
     name: "User",
@@ -29,6 +42,17 @@ const UserType = new GraphQLObjectType({
         id: { type: GraphQLString },
         firstName: { type: GraphQLString },
         age: { type: GraphQLInt },
+        company: {
+            type: CompanyType,
+            resolve(parentValue, args) {
+                // console.log(parentValue, args);
+                return axios
+                    .get(
+                        `http://localhost:3000/companies/${parentValue.companyId}`
+                    )
+                    .then((response) => response.data);
+            },
+        },
     },
 });
 
